@@ -11,11 +11,15 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import py_eureka_client.eureka_client as eureka_client
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
+eureka_client.init(eureka_server="http://localhost:8761/eureka",
+                   app_name="recommendation-service",
+                   instance_port=8000,
+                   instance_host='0.0.0.0')
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
@@ -37,6 +41,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "py_eureka_client",
+    "rest_framework"
 ]
 
 MIDDLEWARE = [
